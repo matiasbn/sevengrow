@@ -1,0 +1,19 @@
+{
+  "name": "sevengrow-storage",
+  "version": "0.0.1",
+  "description": "Storage business logic for Sevengrow storage module",
+  "main": "storage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiasbn/sevengrow.git"
+  },
+  "author": "Matías Barrios (matias.barriosn@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matiasbn/sevengrow/issues"
+  },
+  "homepage": "https://github.com/matiasbn/sevengrow#readme"
+}

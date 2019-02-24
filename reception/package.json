@@ -2,7 +2,7 @@
   "name": "sevengrow-reception",
   "version": "0.0.1",
   "description": "MQTT service for Sevengrow reception module",
-  "main": "app.js",
+  "main": "reception.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/matiasbn/sevengrow/issues"
   },
-  "homepage": "https://github.com/matiasbn/sevengrow#readme"
+  "homepage": "https://github.com/matiasbn/sevengrow#readme",
+  "dependencies": {
+    "mqtt": "^2.18.8"
+  }
 }
