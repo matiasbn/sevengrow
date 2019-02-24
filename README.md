@@ -37,7 +37,7 @@ _The Transmission module is the one that is on charge of transmitting the data s
 
   * Measure devices topic format: 
   ````
-  /sevengrow/clientid/measure/
+  /sevengrow/clientid/sensor/
   ````
   * Payload format: 
   

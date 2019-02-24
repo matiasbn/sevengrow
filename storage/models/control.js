@@ -4,27 +4,33 @@ const Schema = mongoose.Schema;
 
 const controlSchema = new Schema({
     clientID: {
-        type: Number
+        type: Number,
+        required: true
     },
 
     relay1: {
-        type: Number
+        type: Number,
+        required: true
     },
 
     relay2: {
-        type: Number
+        type: Number,
+        required: true
     },
 
     relay3: {
-        type: Number
+        type: Number,
+        required: true
     },
 
     relay4: {
-        type: Number
+        type: Number,
+        required: true
     },
 
     timestamp: {
-        type: String
+        type: String,
+        required: true
     }
 
 })

@@ -6,13 +6,15 @@ module.exports.saveSensor = (_clientID, _payload) => {
     humidity = parseFloat(payloadArray[1], 10);
     power = parseFloat(payloadArray[2], 10);
     temperature = parseFloat(payloadArray[3], 10);
+    timestamp = payloadArray[4];
 
     let sensor = new Sensor({
         clientID: parseInt(_clientID, 10),
         co2,
         humidity,
         power,
-        temperature
+        temperature,
+        timestamp
     })
     sensor.save((err, sensorDB) => {
         if (err) {

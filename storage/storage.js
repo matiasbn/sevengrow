@@ -17,9 +17,9 @@ const processToStorage = (_topic, _payload) => {
     }
     else {
         switch (actionType) {
-            case 'measure':
+            case 'sensor':
                 saveSensor(clientID, _payload);
-                console.log('measure type')
+                console.log('sensor type')
                 break;
             case 'control':
                 saveControl(clientID, _payload);
