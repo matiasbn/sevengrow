@@ -21,8 +21,6 @@ _The Measure module is the one that is on charge of measuring the next parameter
 * Power:
   This corresponds to the power used by the complete system.
 
-
-
 ### [M2]Control
 
 _The Control module is the one that is on charge of controlling the devices to achieve the ideal parameters mentioned on the previous section:_
@@ -37,7 +35,10 @@ _The Transmission module is the one that is on charge of transmitting the data s
 
   * Measure devices topic format: 
   ````
-  /sevengrow/clientid/sensor/
+  /sevengrow/clientid/sensor/co2
+  /sevengrow/clientid/sensor/humidity
+  /sevengrow/clientid/sensor/power
+  /sevengrow/clientid/sensor/temperature
   ````
   * Payload format: 
   
@@ -70,6 +71,6 @@ There would be 4 collections:
 #### Blockchain
 **SOON**
 
-#TODO
+# TODO
 - [ ] State timestamps on sensor
 - [ ] State timestamps on control

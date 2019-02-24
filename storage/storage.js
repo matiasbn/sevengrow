@@ -12,13 +12,14 @@ const processToStorage = (_topic, _payload) => {
     const topicArray = _topic.split('/');
     const clientID = topicArray[1];
     const actionType = topicArray[2];
+    const dataType = topicArray[3];
     if (!clientExists(clientID)) {
         console.log('storage/storage.js.processStorage: client dont exists')
     }
     else {
         switch (actionType) {
             case 'sensor':
-                saveSensor(clientID, _payload);
+                saveSensor(clientID, dataType, _payload);
                 console.log('sensor type')
                 break;
             case 'control':
