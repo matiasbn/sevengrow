@@ -10,11 +10,11 @@ def on_message(client, userdata, msg):
 
 def random_data():
     clientID = "%d" % random.uniform(1,10)
-    co2 = "%f,%f"%(random.normalvariate(1300, 100),time.time())
-    humidity = "%f,%f"%(random.normalvariate(55, 5),time.time())
-    power = "%f,%f"%(random.normalvariate(700, 10),time.time())
-    temperature = "%f,%f"%(random.normalvariate(25, 3),time.time())
     timestamp = time.time()
+    co2 = "%f,%f"%(random.normalvariate(1300, 100),timestamp)
+    humidity = "%f,%f"%(random.normalvariate(55, 5),timestamp)
+    power = "%f,%f"%(random.normalvariate(700, 10),timestamp)
+    temperature = "%f,%f"%(random.normalvariate(25, 3),timestamp)
     co2_topic = "sevengrow/%s/sensor/co2/"%(clientID)
     humidity_topic = "sevengrow/%s/sensor/humidity/"%(clientID)
     power_topic = "sevengrow/%s/sensor/power/"%(clientID)
