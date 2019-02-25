@@ -40,9 +40,6 @@ _The Transmission module is the one that is on charge of transmitting the data s
   /sevengrow/clientid/sensor/power
   /sevengrow/clientid/sensor/temperature
   ````
-  * Payload format: 
-  
-  co2,humidity,power,temperature,timestamp
 
   * Control devices topic format:
   ````
