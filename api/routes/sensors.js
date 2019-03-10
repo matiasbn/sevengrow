@@ -1,8 +1,8 @@
 const express = require('express');
-const Co2 = require('../../storage/models/co2');
-const Humidity = require('../../storage/models/humidity');
-const Power = require('../../storage/models/power');
-const Temperature = require('../../storage/models/temperature');
+const Co2 = require('../../storage/models/sensor/co2');
+const Humidity = require('../../storage/models/sensor/humidity');
+const Power = require('../../storage/models/sensor/power');
+const Temperature = require('../../storage/models/sensor/temperature');
 const app = express();
 
 app.get('/co2/', function (req, res) {

@@ -8,7 +8,7 @@ const { saveControl } = require('./helpers/saveControls');
  * @param {String} _payload 
  */
 
-const processToStorage = (_topic, _payload) => {
+module.exports.processToStorage = (_topic, _payload) => {
     const topicArray = _topic.split('/');
     const clientID = topicArray[1];
     const actionType = topicArray[2];
@@ -23,7 +23,7 @@ const processToStorage = (_topic, _payload) => {
                 console.log('sensor type')
                 break;
             case 'control':
-                saveControl(clientID, _payload);
+                saveControl(clientID, dataType, _payload);
                 console.log('control type')
                 break;
             default:
@@ -31,7 +31,3 @@ const processToStorage = (_topic, _payload) => {
         }
     }
 }
-
-module.exports = {
-    processToStorage
-};

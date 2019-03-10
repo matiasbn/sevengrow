@@ -1,8 +1,11 @@
 require('dotenv').config();
-console.log(process.env.MAIN_TOPIC)
 const mainTopic = process.env.MAIN_TOPIC;
 var mqtt = require('mqtt');
 var settings = {
+    host: process.env.CLOUD_MQTT_URL,
+    port: process.env.CLOUD_MQTT_PORT,
+    username: process.env.CLOUD_MQTT_USERNAME,
+    password: process.env.CLOUD_MQTT_PASS,
     keepalive: 1000
 }
 

@@ -21,8 +21,10 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.15",
-    "mqtt": "^2.18.8"
+    "mqtt": "^2.18.8",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "vue": "^2.6.7",

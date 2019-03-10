@@ -1,26 +1,66 @@
-const Control = require('../models/control')
+const Extractor = require('../models/control/extractor')
+const Humidifier = require('../models/control/humidifier')
+var redis = require('redis');
 
-module.exports.saveControl = (_clientID, _payload) => {
-    payloadArray = _payload.split(',');
-    relay1 = parseInt(payloadArray[0], 10);
-    relay2 = parseInt(payloadArray[1], 10);
-    relay3 = parseInt(payloadArray[2], 10);
-    relay4 = parseInt(payloadArray[3], 10);
-    timestamp = payloadArray[4];
+module.exports.saveControl = (_clientID, _dataType, _payload) => {
 
-    let control = new Control({
-        clientID: parseInt(_clientID, 10),
-        relay1,
-        relay2,
-        relay3,
-        relay4,
-        timestamp
-    })
-    control.save((err, sensorDB) => {
-        if (err) {
-            console.log('storage/helpers/saveControl.js: not successfully saved')
-            return false;
-        }
-        console.log('control successfully saved');
-    })
+    let control;
+    let validTopic = true;
+    let timestamp = new Date();
+
+    switch (_dataType) {
+        case 'extractor':
+            control = new Extractor({
+                clientID: parseInt(_clientID, 10),
+                state: _payload,
+                timestamp: timestamp,
+                year: timestamp.getFullYear(),
+                month: timestamp.getMonth(),
+                day: timestamp.getDate(),
+                hour: timestamp.getHours(),
+                minute: timestamp.getMinutes(),
+                second: timestamp.getSeconds(),
+            });
+            break;
+
+        case 'humidifier':
+            control = new Humidifier({
+                clientID: parseInt(_clientID, 10),
+                state: _payload,
+                timestamp: timestamp,
+                year: timestamp.getFullYear(),
+                month: timestamp.getMonth(),
+                day: timestamp.getDate(),
+                hour: timestamp.getHours(),
+                minute: timestamp.getMinutes(),
+                second: timestamp.getSeconds(),
+            });
+            break;
+
+        default:
+            console.log('action not allowed: ' + _dataType);
+            validTopic = false;
+    }
+    if (validTopic && (_payload === "on" || _payload === "off")) {
+        control.save((err, controlDB) => {
+            if (err) {
+                console.log('storage/helpers/saveControl.js: not successfully saved')
+                return false;
+            }
+            console.log('control successfully saved');
+        })
+
+        var client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_URL);
+
+        client.on('connect', function () {
+            let lastData = 'last-' + _dataType;
+            client.set(lastData, _payload);
+        });
+
+        client.on('error', function (err) {
+            console.log('Redis client error: ' + err);
+        });
+
+    }
+
 }
