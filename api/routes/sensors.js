@@ -5,7 +5,7 @@ const Power = require('../../storage/models/power');
 const Temperature = require('../../storage/models/temperature');
 const app = express();
 
-app.get('/co2/:clientID', function (req, res) {
+app.get('/co2/', function (req, res) {
     let clienttID = req.params.clienttID;
     Co2.find({ clienttID }, (err, clientDB) => {
         if (err) {
