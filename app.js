@@ -10,7 +10,9 @@ let auth = {
     user: process.env.MONGO_USER,
     pass: process.env.MONGO_PASSWORD
 }
-mongoose.connect(process.env.MONGOBD_URI, (err, res) => {
+
+console.log(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, auth, (err, res) => {
     if (err) throw err;
 
     console.log('Database connected');
