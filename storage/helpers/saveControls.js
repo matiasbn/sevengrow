@@ -1,12 +1,12 @@
 const Extractor = require('../models/control/extractor')
 const Humidifier = require('../models/control/humidifier')
-var redis = require('redis');
+const client = require('../../redis')
 
 module.exports.saveControl = (_clientID, _dataType, _payload) => {
 
     let control;
     let validTopic = true;
-    let timestamp = new Date();
+    let timestamp = Math.floor(new Date().getTime() / 1000);
 
     switch (_dataType) {
         case 'extractor':
@@ -38,16 +38,8 @@ module.exports.saveControl = (_clientID, _dataType, _payload) => {
             console.log('control successfully saved');
         })
 
-        var client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_URL);
-
-        client.on('connect', function () {
-            let lastData = _clientID + '-last-' + _dataType;
-            client.set(lastData, _payload);
-        });
-
-        client.on('error', function (err) {
-            console.log('Redis client error: ' + err);
-        });
+        let lastData = _clientID + '-last-' + _dataType;
+        client.set(lastData, _payload);
 
     }
 

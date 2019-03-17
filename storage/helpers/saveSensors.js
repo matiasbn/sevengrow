@@ -3,22 +3,12 @@ const Co2 = require('../models/sensor/co2')
 const Humidity = require('../models/sensor/humidity')
 const Power = require('../models/sensor/power')
 const Temperature = require('../models/sensor/temperature')
-var redis = require('redis');
-
-// getFullYear()	Get the year as a four digit number(yyyy)
-// getMonth()	Get the month as a number(0 - 11)
-// getDate()	Get the day as a number(1 - 31)
-// getHours()	Get the hour(0 - 23)
-// getMinutes()	Get the minute(0 - 59)
-// getSeconds()	Get the second(0 - 59)
-// getMilliseconds()	Get the millisecond(0 - 999)
-// getTime()	Get the time(milliseconds since January 1, 1970)
-// getDay()	Get the weekday as a number(0 - 6)
+const client = require('../../redis')
 
 module.exports.saveSensor = (_clientID, _dataType, _payload) => {
     payloadArray = _payload.split(',');
     data = parseFloat(payloadArray[0], 10);
-    timestamp = new Date(parseInt(payloadArray[1]) * 1000);
+    timestamp = payloadArray[1];
     let sensor;
     let validTopic = true;
     switch (_dataType) {
@@ -64,17 +54,19 @@ module.exports.saveSensor = (_clientID, _dataType, _payload) => {
             console.log('sensor successfully saved');
         });
 
-        var client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_URL);
-
-        client.on('connect', function () {
-            let lastData = _clientID + '-last-' + _dataType;
-            client.set(lastData, data);
-        });
-
-        client.on('error', function (err) {
-            console.log('Redis client error: ' + err);
-        });
+        let lastData = _clientID + '-last-' + _dataType;
+        client.set(lastData, data);
 
     }
 
 }
+
+// getFullYear()	Get the year as a four digit number(yyyy)
+// getMonth()	Get the month as a number(0 - 11)
+// getDate()	Get the day as a number(1 - 31)
+// getHours()	Get the hour(0 - 23)
+// getMinutes()	Get the minute(0 - 59)
+// getSeconds()	Get the second(0 - 59)
+// getMilliseconds()	Get the millisecond(0 - 999)
+// getTime()	Get the time(milliseconds since January 1, 1970)
+// getDay()	Get the weekday as a number(0 - 6)
