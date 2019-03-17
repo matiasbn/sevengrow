@@ -3,16 +3,15 @@ require('dotenv').config();
 const assert = require('assert');
 const { connectAndListenToMQTT } = require('./reception/reception');
 const moment = require('moment');
-var redis = require('redis');
 var client = require('./redis');
 
-let auth = {
+let options = {
+    useNewUrlParser: true,
     user: process.env.MONGO_USER,
     pass: process.env.MONGO_PASSWORD
 }
 
-console.log(process.env.MONGO_URL);
-mongoose.connect(process.env.MONGO_URL, auth, (err, res) => {
+mongoose.connect(process.env.MONGO_URL, options, (err, res) => {
     if (err) throw err;
 
     console.log('Database connected');
