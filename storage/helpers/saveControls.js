@@ -13,13 +13,7 @@ module.exports.saveControl = (_clientID, _dataType, _payload) => {
             control = new Extractor({
                 clientID: parseInt(_clientID, 10),
                 state: _payload,
-                timestamp: timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp: timestamp
             });
             break;
 
@@ -27,13 +21,7 @@ module.exports.saveControl = (_clientID, _dataType, _payload) => {
             control = new Humidifier({
                 clientID: parseInt(_clientID, 10),
                 state: _payload,
-                timestamp: timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp: timestamp
             });
             break;
 
@@ -53,7 +41,7 @@ module.exports.saveControl = (_clientID, _dataType, _payload) => {
         var client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_URL);
 
         client.on('connect', function () {
-            let lastData = 'last-' + _dataType;
+            let lastData = _clientID + '-last-' + _dataType;
             client.set(lastData, _payload);
         });
 

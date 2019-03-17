@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mainTopic = process.env.MAIN_TOPIC;
 var mqtt = require('mqtt');
+var { processToStorage } = require('../storage/storage')
 var settings = {
     host: process.env.CLOUD_MQTT_URL,
     port: process.env.CLOUD_MQTT_PORT,
@@ -12,7 +13,6 @@ var settings = {
 module.exports.connectAndListenToMQTT = () => {
 
     var client = mqtt.connect(settings);
-    var { processToStorage } = require('../storage/storage')
 
     client.on('connect', function () {
         client.subscribe(mainTopic + '/#');

@@ -26,52 +26,28 @@ module.exports.saveSensor = (_clientID, _dataType, _payload) => {
             sensor = new Co2({
                 clientID: parseInt(_clientID, 10),
                 co2: data,
-                timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp
             });
             break;
         case 'humidity':
             sensor = new Humidity({
                 clientID: parseInt(_clientID, 10),
                 humidity: data,
-                timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp
             });
             break;
         case 'power':
             sensor = new Power({
                 clientID: parseInt(_clientID, 10),
                 power: data,
-                timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp
             })
             break;
         case 'temperature':
             sensor = new Temperature({
                 clientID: parseInt(_clientID, 10),
                 temperature: data,
-                timestamp,
-                year: timestamp.getFullYear(),
-                month: timestamp.getMonth(),
-                day: timestamp.getDate(),
-                hour: timestamp.getHours(),
-                minute: timestamp.getMinutes(),
-                second: timestamp.getSeconds(),
+                timestamp
             })
             break;
         default:
@@ -91,7 +67,7 @@ module.exports.saveSensor = (_clientID, _dataType, _payload) => {
         var client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_URL);
 
         client.on('connect', function () {
-            let lastData = 'last-' + _dataType;
+            let lastData = _clientID + '-last-' + _dataType;
             client.set(lastData, data);
         });
 
